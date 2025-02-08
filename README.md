@@ -106,7 +106,124 @@ git remote set-url origin https://your-token@github.com/你的GitHub帳號/你�
 ---
 
 ## **8. 常見錯誤處理**
-如果遇到 Git 錯誤，請參考 [`troubleshooting.md`](troubleshooting.md)。
+### Git `error: src refspec main does not match any` 錯誤解決方案
+
+當你嘗試執行 `git push origin main` 時，可能會遇到以下錯誤：
+
+```bash
+error: src refspec main does not match any
+```
+
+這通常是因為 Git 無法找到 `main` 分支，可能的原因如下：
+
+---
+
+#### **1. 確保已經初始化 Git 並提交專案**
+
+在你的專案目錄中執行：
+
+```bash
+git status
+```
+
+如果 Git 回應：
+
+```bash
+fatal: not a git repository (or any of the parent directories): .git
+```
+
+表示你還沒有初始化 Git，你需要執行：
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+```
+
+這將初始化 Git 並提交你的專案。
+
+---
+
+#### **2. 檢查當前分支名稱**
+
+執行：
+
+```bash
+git branch
+```
+
+如果輸出結果是：
+
+```bash
+* master
+```
+
+表示你的當前分支名稱是 `master`，但你在 `git push origin main` 時使用了 `main`，導致 Git 無法找到該分支。
+
+#### **解決方法**
+1. **將 `main` 改為 `master` 推送**
+   ```bash
+   git push origin master
+   ```
+
+2. **將 `master` 重新命名為 `main`（推薦）**
+   ```bash
+   git branch -M main
+   git push -u origin main
+   ```
+
+---
+
+#### **3. 確保遠端倉庫已正確設置**
+
+執行以下命令來檢查遠端倉庫：
+
+```bash
+git remote -v
+```
+
+如果沒有遠端倉庫，則需要執行：
+
+```bash
+git remote add origin https://github.com/你的GitHub帳號/你的倉庫名稱.git
+```
+
+然後執行：
+
+```bash
+git push -u origin main
+```
+
+---
+
+#### **4. 確保 GitHub 上的倉庫已經建立**
+
+如果 GitHub 上沒有對應的 Repository，你需要：
+
+1. **手動在 GitHub 上建立一個新的 Repository**
+2. **然後執行以下命令**
+
+```bash
+git remote add origin https://github.com/你的GitHub帳號/你的倉庫名稱.git
+git branch -M main
+git push -u origin main
+```
+
+這樣應該可以解決問題。
+
+---
+
+#### **總結**
+
+| 問題 | 解決方法 |
+|------|---------|
+| **未初始化 Git** | `git init`，然後 `git add .` 和 `git commit -m "Initial commit"` |
+| **當前分支是 `master` 而不是 `main`** | 使用 `git branch -M main` 來重命名 |
+| **遠端倉庫未設定** | 執行 `git remote add origin` 並正確推送 |
+| **GitHub 上倉庫未建立** | 先手動建立倉庫，然後設定 `remote` 並推送 |
+
+如果仍然遇到問題，可以提供 `git branch` 和 `git remote -v` 的輸出來進一步診斷！🚀
+
 
 ---
 

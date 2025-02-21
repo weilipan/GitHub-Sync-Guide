@@ -41,7 +41,13 @@ git remote add origin https://github.com/你的GitHub帳號/你的Repository名�
 
 ---
 
-## **4. 拉取遠端變更，確保本機與遠端同步**
+## **4.將 `master` 重新命名為 `main`（推薦）**
+   ```bash
+   git branch -M main
+   git push -u origin main
+   ```
+---
+## **5. 拉取遠端變更，確保本機與遠端同步**
 如果遠端 repository 已有內容，請執行：
 ```bash
 git pull origin main --rebase
@@ -54,18 +60,18 @@ git rebase --continue
 
 ---
 
-## **5. 提交並推送變更到 GitHub**
-### **5.1 新增檔案至 Git**
+## **6. 提交並推送變更到 GitHub**
+### **6.1 新增檔案至 Git**
 ```bash
 git add .
 ```
 
-### **5.2 提交變更**
+### **6.2 提交變更**
 ```bash
 git commit -m "更新說明"
 ```
 
-### **5.3 推送至 GitHub**
+### **6.3 推送至 GitHub**
 ```bash
 git push origin main
 ```
@@ -78,7 +84,7 @@ git pull origin main --rebase
 
 ---
 
-## **6. 從 GitHub 克隆（Clone）專案到本機**
+## **7. 從 GitHub 克隆（Clone）專案到本機**
 如果你想下載遠端 GitHub 專案到本機，請執行：
 ```bash
 git clone https://github.com/你的GitHub帳號/你的Repository名稱.git
@@ -88,16 +94,16 @@ git clone https://github.com/你的GitHub帳號/你的Repository名稱.git
 
 ---
 
-## **7. 使用 GitHub Token 進行身份驗證**
+## **8. 使用 GitHub Token 進行身份驗證**
 GitHub 不再支援使用密碼進行驗證，你需要使用 **Personal Access Token (PAT)**。
 
-### **7.1 生成 GitHub Token**
+### **8.1 生成 GitHub Token**
 1. 登入 GitHub → 點擊 **你的頭像** → **Settings**（設定）。
 2. 進入 **Developer settings** → **Personal access tokens**。
 3. 點擊 **Generate new token**，選擇 `repo` 權限。
 4. 產生 Token，並**記住這組 Token**。
 
-### **7.2 設定 Git 使用 Token**
+### **8.2 設定 Git 使用 Token**
 ```bash
 git remote set-url origin https://your-token@github.com/你的GitHub帳號/你的Repository名稱.git
 ```
@@ -105,7 +111,7 @@ git remote set-url origin https://your-token@github.com/你的GitHub帳號/你�
 
 ---
 
-## **8. 常見錯誤處理**
+## **9. 常見錯誤處理**
 ### Git `error: src refspec main does not match any` 錯誤解決方案
 
 當你嘗試執行 `git push origin main` 時，可能會遇到以下錯誤：
